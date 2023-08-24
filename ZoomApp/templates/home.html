@@ -1,0 +1,346 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="{% static 'home.css' %}"> -->
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            /* Disable vertical scrolling */
+        }
+        
+        .home {
+            display: inline-flex;
+            width: 1540px;
+            flex-direction: column;
+            align-items: center;
+            gap: 103px;
+            background: #FFF;
+        }
+        
+        .custom_recipe_section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 29px;
+        }
+        
+        .custom_inspiration_section {
+            display: flex;
+            width: 1540px;
+            padding: 39px 170px 40px 170px;
+            justify-content: center;
+            align-items: flex-start;
+            background: #FFF;
+        }
+        
+        .custom_flex_container_inspiration {
+            display: flex;
+            width: 1100px;
+            max-width: 1100px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 33px;
+            flex-shrink: 0;
+        }
+        
+        .custom_inspiration_text {
+            max-width: 1100px;
+            color: #1C1C1C;
+            font-family: Lora;
+            font-size: 30px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 36px;
+            /* 120% */
+        }
+        
+        .custom_inspiration_image_container {
+            display: flex;
+            width: 1100px;
+            align-items: flex-start;
+        }
+        
+        .custom_image_flex_container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        
+        .custom_inspiration_slide_control {
+            width: 34px;
+            height: 34px;
+            position: absolute;
+            right: -83px;
+            top: 58px;
+            fill: #FFF;
+            filter: drop-shadow(0px 1px 18px rgba(0, 0, 0, 0.12)) drop-shadow(0px 6px 10px rgba(0, 0, 0, 0.14)) drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.20));
+        }
+        
+        .custom_image_box_container {
+            display: flex;
+            width: 13200px;
+            padding-right: 0px;
+            align-items: flex-start;
+        }
+        
+        .custom_image_margin_space {
+            display: flex;
+            width: 190px;
+            padding-right: 0px;
+            align-items: flex-start;
+            flex-shrink: 0;
+        }
+        
+        .custom_image_name_section {
+            display: flex;
+            width: 166.59px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+        
+        .custom_recipe_image_name {
+            display: flex;
+            width: 150px;
+            height: 150px;
+            max-width: 166.59px;
+            align-items: flex-start;
+        }
+        
+        .custom_recipe_image_name_src {
+            width: 150px;
+            height: 150px;
+            flex-shrink: 0;
+            border-radius: 75px;
+            background: url(<path-to-image>), lightgray 50% / cover no-repeat;
+        }
+        
+        .custom_recipe_name {
+            display: flex;
+            width: 166.59px;
+            padding-right: 0px;
+            justify-content: center;
+            align-items: flex-start;
+            max-width: 150.59px;
+            color: #363636;
+            text-align: center;
+            font-family: Lora;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 32px;
+            /* 160% */
+        }
+        
+        .custom_top_recipe_section {
+            display: flex;
+            width: 1100px;
+            max-width: 1100px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 33px;
+        }
+        
+        .custom_top_recipe_heading {
+            max-width: 1100px;
+            color: #1C1C1C;
+            font-family: Lora;
+            font-size: 30px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 36px;
+            /* 120% */
+        }
+        
+        .custom_top_recipe_images_container {
+            display: flex;
+            width: 1100px;
+            align-items: flex-start;
+        }
+        
+        .custom_top_recipe_flex_container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        
+        .custom_top_recipe_slide_control {
+            width: 34px;
+            height: 34px;
+            position: absolute;
+            right: -86px;
+            top: 60px;
+            fill: #FFF;
+            filter: drop-shadow(0px 1px 18px rgba(0, 0, 0, 0.12)) drop-shadow(0px 6px 10px rgba(0, 0, 0, 0.14)) drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.20));
+        }
+        
+        .custom_recipe_box_container {
+            display: flex;
+            width: 11000px;
+            padding-right: 0px;
+            align-items: flex-start;
+        }
+        
+        .custom_recipe_margin_space {
+            display: flex;
+            width: 190px;
+            padding: 0px 40px 29.19px 0px;
+            align-items: flex-start;
+            flex-shrink: 0;
+        }
+        
+        .custom_recipe_details_box {
+            display: flex;
+            width: 150px;
+            padding-bottom: 0px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+        
+        .custom_top_recipe_image_container {
+            display: flex;
+            padding: 1px;
+            align-items: flex-start;
+            border-radius: 75.5px;
+            border: 1px solid #E8E8E8;
+            background: rgba(255, 255, 255, 0.00);
+            /* dropcurrent */
+            box-shadow: 0px 3px 12px 0px rgba(0, 0, 0, 0.08);
+        }
+        
+        .custom_top_recipe_title {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        
+        .custom_top_recipe_time {
+            color: #1C1C1C;
+            text-align: center;
+            font-family: Lora;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 16.8px;
+            /* 120% */
+        }
+        
+        .custom_top_recipe_name {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            max-width: 150px;
+            color: #1C1C1C;
+            text-align: center;
+            font-family: Lora;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 19.2px;
+            /* 120% */
+        }
+        
+        .custom_image_padding {
+            display: flex;
+            width: 148px;
+            height: 150px;
+            max-width: 150px;
+            padding: 16px;
+            align-items: flex-start;
+            background: #FFF;
+        }
+        
+        .custom_top_recipe_name_container {
+            width: 116px;
+            height: 118px;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="home">
+        {% include 'search.html' %}
+        <div class="custom_recipe_section">
+            <div class="custom_inspiration_section">
+                <div class="custom_flex_container_inspiration">
+                    <div class="custom_inspiration_text">Inspiration for your first order</div>
+                    <div class="custom_inspiration_image_container">
+                        <div class="custom_image_flex_container">
+                            <div class="custom_image_box_container">
+                                <div class="custom_image_margin_space">
+                                    <div class="custom_image_name_section">
+                                        <div class="custom_recipe_image_name">
+                                            <img class="custom_recipe_image_name_src" src="../../media/recipe_image/Pasta.jpg" alt="Favorite Image" />
+                                        </div>
+                                        <div class="custom_recipe_name">Biryani</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="custom_inspiration_slide_control">next-slide</div>
+                    </div>
+                </div>
+            </div>
+            <div class="custom_top_recipe_section">
+                <div class="custom_top_recipe_heading">Top recipes for you</div>
+                <div class="custom_top_recipe_images_container">
+                    <div class="custom_top_recipe_flex_container">
+                        <div class="custom_recipe_box_container">
+                            <div class="custom_recipe_margin_space">
+                                <div class="custom_recipe_details_box">
+                                    <div class="custom_top_recipe_image_container">
+                                        <div class="custom_image_padding">
+                                            <div class="custom_top_recipe_name_container">
+                                                <img src="#" alt="Top Recipe" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="custom_top_recipe_title">
+                                        <div class="custom_top_recipe_name">SS Hyderabad Biryani</div>
+                                    </div>
+                                    <div class="custom_top_recipe_time">25 min</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="custom_top_recipe_slide_control">next-slide</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="custom_recipe">
+        <div class="custom_recipe_alignleft">
+            <div class="custom_recipe_padding">
+                <div class="filter">
+                    <div class="filter_centertext" tabindex="0">
+                        Filters
+                    </div>
+                </div>
+                <div class="rating">
+                    <div class="rating_centertext" tabindex="0">
+                        Rating: 4.0+
+                    </div>
+                </div>
+                <div class="cuisines">
+                    <div class="cuisines_centertext" tabindex="0">
+                        Cuisines
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+</body>
+
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        .navbar {
+            display: flex;
+            width: 1540px;
+            height: 108px;
+            padding: 24px 53px;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 53px;
+            flex-shrink: 0;
+            background: #FFF;
+            box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+        }
+        
+        .left_nav {
+            display: flex;
+            align-items: center;
+            gap: 264px;
+        }
+        
+        .right_nav {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 150px;
+        }
+        
+        .right_nav_menu {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 53px;
+        }
+        
+        .right_nav_signup {
+            display: flex;
+            padding: 8px 20px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            border-radius: 10px;
+        }
+        
+        .right_nav_home {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-start;
+            gap: 5px;
+        }
+        
+        .right_nav_recipe {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-start;
+            gap: 5px;
+        }
+        
+        .right_nav_saved {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: flex-start;
+            gap: 5px;
+        }
+        
+        .right_nav_signin {
+            display: flex;
+            padding: 8px 20px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            color: #000;
+            font-family: Lora;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        
+        .search_tab {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .search_box {
+            width: 329px;
+            height: 33px;
+            border-radius: 10px;
+            border: 1px solid #000;
+            background: #FFF;
+        }
+        
+        .search_icon {
+            width: 29px;
+            height: 29px;
+        }
+        
+        .filtter {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .filtter-search {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 329px;
+            text-align: justify;
+            text-indent: 10px;
+            height: 33px;
+            border: 1px solid #000;
+            background: #fff;
+        }
+        
+        .filtter-icon {
+            width: 24px;
+            height: 24px;
+            stroke-width: 2px;
+            stroke: #000;
+        }
+        
+        .logobox {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .logobaox2 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logoicon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            gap: 16px;
+        }
+        
+        .logonmae {
+            color: #ff5733;
+            font-family: Lora;
+            font-size: 48px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+        }
+        
+        .logonmae1 {
+            color: #000;
+            font-family: Lora;
+            font-size: 48px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            letter-spacing: 5.52px;
+        }
+        
+        .logonmae2 {
+            color: #8cc152;
+            font-family: Lora;
+            font-size: 48px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="left_nav">
+            <div class="logobox">
+                <img src="../static/media/logo.png" height="40px">
+            </div>
+            <div class="search_tab"><input class="search_box" />
+                <div class="search_icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29" fill="none">
+                    <path
+                    d="M20.1459 20.1081L25.375 25.375M22.9583 13.2917C22.9583 18.6304 18.6304 22.9583 13.2917 22.9583C7.95291 22.9583 3.625 18.6304 3.625 13.2917C3.625 7.95291 7.95291 3.625 13.2917 3.625C18.6304 3.625 22.9583 7.95291 22.9583 13.2917Z"
+                    stroke="black"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    />
+                </svg>
+                </div>
+            </div>
+            <div class="right_nav">
+                <div class="right_nav_menu">
+                    <div class="right_nav_home"><a href="{% url 'home' %}">Home</a></div>
+                    <div class="right_nav_recipe">Recipe</div>
+                    <div class="right_nav_saved">Saved</div>
+                </div>
+                <div class="right_nav_signin">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}">Logout</a> {% else %}
+                    <a href="{% url 'login' %}">Sign in</a> {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
