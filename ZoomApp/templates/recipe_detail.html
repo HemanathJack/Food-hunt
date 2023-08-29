@@ -3,6 +3,7 @@
 
 <head>
     <title>{{ recipe.title }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <style>
         body {
             margin: 0;
@@ -11,54 +12,18 @@
         }
         
         .row {
-            display: flex;
-            width: 1540px;
-            height: 720px;
-            padding-bottom: 0px;
-            justify-content: center;
-            align-items: center;
-            background-color: #ffff;
-            overflow-x: hidden;
-        }
-        
-        .cardrecipe {
-            width: 397px;
-            height: 315px;
-            flex-shrink: 0;
-            border-radius: 20px;
-            background: #FFF;
-            box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
-        }
-        
-        .recipeimage {
             display: inline-flex;
+            width: 1540px;
             flex-direction: column;
-            align-items: flex-start;
-            gap: 10px;
-        }
-        
-        .recipedetailts {
-            width: 186px;
-            height: 44px;
-            flex-shrink: 0;
-            color: #000;
-            font-family: Inter;
-            font-size: 12px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: normal;
-        }
-        
-        .recimage {
-            width: 397px;
-            height: 158px;
-            background: url(https://s3-alpha-sig.figma.com/img/19dc/b2af/3b6ad2efa4bb859403975c7b2858113f?Expires=1693785600&Signature=NcEJj-ENbGrmCFvNv-uZ4gU~RxDL-tKXqIu4N9s54QiCSsMUfKQLil96r8JR3wuQXMWQ0a1kFATTSb7AGBpXNxgBww-3Fewv3v33b6OmkqkxrosUqqhkLBm7t0Kso6CgCyf9cL4nCJMsMOsEd~CnzzX3ccgeXzVxns0guNkapQdGdQ6ilRVO7PybfjWLUG7LDOcQdCGCfqpr7jMS9EqNv1399suoKn0pHamkefouk1OScvwP5ENxKEb89blZAnPG3kxuk6U5Mj-tKvcsP3F8qucE5Q-heqnX4HE29oT1tXHsVc6RXz2T69blNMIi6qsTGzVb-YHhRhpMjW6mTR6WgQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4), lightgray 50% / cover no-repeat;
-            background-size: cover
+            align-items: center;
+            gap: 103px;
+            background: #FFF;
         }
     </style>
 </head>
 
 <body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <div class="row">
         {% include 'search.html' %}
         <div class="cardrecipe">
@@ -66,7 +31,7 @@
             <div class="recipeimage">
                 <div class="recimage"><img src="{{ recipe.img.url }}"></div>
             </div>
-            <div class="recipedetailts">{{ recipe.title }} {{ recipe.description }} {{ recipe.ingredients }} {{ recipe.steps }} {{ recipe.images }} {{ recipe.author }}</div>
+            <div class="recipedetailts">{{ recipe.title }} <br>{{ recipe.description }}<br> {{ recipe.ingredients }} <br>{{ recipe.steps }} <br>{{ recipe.images }} <br>{{ recipe.author }}</div>
         </div>
     </div>
 </body>

@@ -29,7 +29,7 @@ urlpatterns = [
     path('recipe/<int:recipe_id>/delete', views.delete_recipe, name='delete_recipe'),
     path('recipes/', views.recipe_list, name='recipe_list'),
     path('recipes/<int:recipe_id>/', views.recipe_detail, name='recipe_detail'),
-    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout'),
     path('social-auth/', include('social_django.urls', namespace='social')),
     path("", views.home, name='home'),
 ]
