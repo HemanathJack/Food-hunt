@@ -4,14 +4,25 @@ from .models import Recipe
 class RecipeForm(forms.ModelForm):
     class Meta:
         model = Recipe
-        fields = ['title', 'description', 'meal_type', 'cooking_time', 'cuisines', 'ingredients', 'steps', 'image']
-        widgets = {
-            'title': forms.TextInput(attrs={'class': 'form-control custom-input'}),
-            'description': forms.Textarea(attrs={'class': 'form-control custom-input'}),
-            'meal_type': forms.Select(attrs={'class': 'form-control custom-input'}),
-            'cooking_time': forms.NumberInput(attrs={'class': 'form-control custom-input'}),
-            'cuisines': forms.SelectMultiple(attrs={'class': 'form-control custom-input'}),
-            'ingredients': forms.Textarea(attrs={'class': 'form-control custom-input'}),
-            'steps': forms.Textarea(attrs={'class': 'form-control custom-input'}),
-            'image': forms.FileInput(attrs={'class': 'form-control custom-input'}),
-        }
+        fields = '__all__'
+    
+    ingredients = forms.JSONField(widget=forms.HiddenInput(), required=False)
+    steps = forms.JSONField(widget=forms.HiddenInput(), required=False)
+
+class IngredientForm(forms.ModelForm):
+    class Meta:
+        model = Recipe
+        fields = ['ingredients']
+
+    ingredients = forms.CharField(widget=forms.Textarea(attrs={'class': 'custom-textarea'}))
+
+IngredientFormSet = forms.formset_factory(IngredientForm, extra=1)
+
+class StepForm(forms.Form):
+    class Meta:
+        model = Recipe
+        fields = ['steps']
+
+    steps = forms.CharField(widget=forms.Textarea(attrs={'class': 'custom-textarea'}))
+
+StepFormSet = forms.formset_factory(StepForm, extra=1)

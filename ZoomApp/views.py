@@ -6,17 +6,15 @@ from django.contrib.auth.views import LogoutView
 from .models import *
 
 # Forms
-from .forms import RecipeForm
+from .forms import RecipeForm, IngredientFormSet, StepFormSet
 
 def login(request):
     return render(request, 'login.html')
 
 def home(request):
     recipes = Recipe.objects.all()
-    cuisines = Cuisine.objects.all()
-    ingredients =Ingredient.objects.all()
-    form = RecipeForm()
-    return render(request, 'home.html', {'recipes':recipes, 'form':form, 'cuisines': cuisines, 'ingredients':ingredients})
+    return render(request, 'home.html', {'recipes':recipes})
+
 
 class CustomLogoutView(LogoutView):
     def dispatch(self, request, *args, **kwargs):
@@ -25,7 +23,11 @@ class CustomLogoutView(LogoutView):
     
 def recipe_list(request):
     recipes = Recipe.objects.all()
-    return render(request, 'recipe_list.html', {'recipes':recipes})
+    for recipe in recipes:
+        ingredients_list = (recipe.ingredients).split()
+        first_three_ingredients = ' '.join(ingredients_list[:3])
+        print(first_three_ingredients)
+    return render(request, 'recipe_list.html', {'recipes':recipes,'first_three_ingredients':first_three_ingredients})
 
 def recipe_detail(request, recipe_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
@@ -35,34 +37,43 @@ def recipe_detail(request, recipe_id):
 @login_required
 def create_recipe(request):
     if request.method == 'POST':
-        title = request.POST['title']
-        description = request.POST['description']
-        steps = request.POST['steps']
-        uploaded_image = request.FILES['image']
-        meal_type = request.POST['meal_type']
-        cooking_time = request.POST['cooking_time']
-        cuisines_ids = request.POST.getlist('cuisines')  # List of cuisine IDs
-        ingredients_ids = request.POST.getlist('ingredients')  # List of ingredient IDs
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        ingredients = request.POST.get('ingredients')
+        steps = request.POST.get('steps')
+        meal_type = request.POST.get('meal_type')
+        cooking_time = request.POST.get('cooking_time')
+        cuisines = request.POST.get('cuisines')
+        image = request.FILES.get('image')
 
-        recipe = Recipe.objects.create(
+        author = request.user
+        
+        # print("Title:", title)
+        # print("Description:", description)
+        # print("Ingredients:", ingredients)
+        # print("Steps:", steps)
+        # print("Meal Type:", meal_type)
+        # print("Cooking Time:", cooking_time)
+        # print("Cuisines:", cuisines)
+        # print("Image:", image)
+        
+        recipe = Recipe(
             title=title,
             description=description,
+            ingredients=ingredients,
             steps=steps,
-            image=uploaded_image,
             meal_type=meal_type,
             cooking_time=cooking_time,
-            author=request.user
+            cuisines=cuisines,
+            author=author,
+            image=image
         )
-
-        # Assign cuisines using the .set() method with IDs
-        recipe.cuisines.set(cuisines_ids)
-
-        # Assign ingredients using the .set() method with IDs
-        recipe.ingredients.set(ingredients_ids)
-
-        return redirect('recipe_list')
-
-    return render(request, 'home.html', {})
+        recipe.save()
+        # print(recipe)
+        
+        return redirect('recipe_list')  # Redirect to a recipe list page
+    
+    return render(request, 'recipe_detail.html', {})
 
 
 def update_recipe(request, recipe_pk):

@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    {% load custom_filters %}
     <title>Recipe List</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
@@ -86,6 +87,9 @@
             flex-direction: column;
             align-items: center;
             gap: 24px;
+            max-height: 600px;
+            /* Set the maximum height you want */
+            overflow: auto;
         }
         
         .recipeframe_tips {
@@ -355,7 +359,7 @@
             width: 311px;
             height: 161px;
             flex-shrink: 0;
-            background: url(../static/media/angeera-restaurant\ 1.png), lightgray 50% / cover no-repeat;
+            background: lightgray 50% / cover no-repeat;
             border-radius: 10px;
         }
         
@@ -572,90 +576,29 @@
                 </div>
             </div>
             <div class="recipeframe_list">
+                {% for recipe in recipes %}
                 <div class="frame4_card">
                     <div class="frame4_card_imagebox">
-                        <div class="frame4_card_imagebox_img"></div>
+                        <div class="frame4_card_imagebox_img"><img src="../../media/{{ recipe.image }}" width="311px" height="161px" /></div>
                     </div>
                     <div class="frame4_card_textbox">
                         <div class="frame4_card_textbox_details">
-                            <span class="frame4_card_textbox_details_1">Mushroom briyani</span>
-                            <span class="frame4_card_textbox_details_2">Arabian</span>
-                            <span class="frame4_card_textbox_details_3">chicken, wheat, rice, water</span>
+                            <span class="frame4_card_textbox_details_1">{{ recipe.title }}</span>
+                            <span class="frame4_card_textbox_details_2">{{ recipe.cuisines }}</span>
+                            <span class="frame4_card_textbox_details_3">{{ recipe.ingredients|first_three_words }}</span>
                         </div>
                         <div class="frame4_circle">
                             <div class="frame4_mealcircle">
                                 <img src="../static/media/Ellipse 1.png" />
-                                <div class="frame4_mealtime"><span class="meal_time_text">20min</span></div>
+                                <div class="frame4_mealtime"><span class="meal_time_text">{{ recipe.cooking_time }}min</span></div>
                             </div>
                             <div class="frame4_mealtype">
-                                <span class="frame4_mealtype_text">Lunch</span>
+                                <span class="frame4_mealtype_text">{{ recipe.meal_type }}</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="frame4_card">
-                    <div class="frame4_card_imagebox">
-                        <div class="frame4_card_imagebox_img"></div>
-                    </div>
-                    <div class="frame4_card_textbox">
-                        <div class="frame4_card_textbox_details">
-                            <span class="frame4_card_textbox_details_1">Mushroom briyani</span>
-                            <span class="frame4_card_textbox_details_2">Arabian</span>
-                            <span class="frame4_card_textbox_details_3">chicken, wheat, rice, water</span>
-                        </div>
-                        <div class="frame4_circle">
-                            <div class="frame4_mealcircle">
-                                <img src="../static/media/Ellipse 1.png" />
-                                <div class="frame4_mealtime"><span class="meal_time_text">20min</span></div>
-                            </div>
-                            <div class="frame4_mealtype">
-                                <span class="frame4_mealtype_text">Lunch</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="frame4_card">
-                    <div class="frame4_card_imagebox">
-                        <div class="frame4_card_imagebox_img"></div>
-                    </div>
-                    <div class="frame4_card_textbox">
-                        <div class="frame4_card_textbox_details">
-                            <span class="frame4_card_textbox_details_1">Mushroom briyani</span>
-                            <span class="frame4_card_textbox_details_2">Arabian</span>
-                            <span class="frame4_card_textbox_details_3">chicken, wheat, rice, water</span>
-                        </div>
-                        <div class="frame4_circle">
-                            <div class="frame4_mealcircle">
-                                <img src="../static/media/Ellipse 1.png" />
-                                <div class="frame4_mealtime"><span class="meal_time_text">20min</span></div>
-                            </div>
-                            <div class="frame4_mealtype">
-                                <span class="frame4_mealtype_text">Lunch</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="frame4_card">
-                    <div class="frame4_card_imagebox">
-                        <div class="frame4_card_imagebox_img"></div>
-                    </div>
-                    <div class="frame4_card_textbox">
-                        <div class="frame4_card_textbox_details">
-                            <span class="frame4_card_textbox_details_1">Mushroom briyani</span>
-                            <span class="frame4_card_textbox_details_2">Arabian</span>
-                            <span class="frame4_card_textbox_details_3">chicken, wheat, rice, water</span>
-                        </div>
-                        <div class="frame4_circle">
-                            <div class="frame4_mealcircle">
-                                <img src="../static/media/Ellipse 1.png" />
-                                <div class="frame4_mealtime"><span class="meal_time_text">20min</span></div>
-                            </div>
-                            <div class="frame4_mealtype">
-                                <span class="frame4_mealtype_text">Lunch</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
             <div class="recipeframe_tips">
                 <div class="tipsframe_imgbox">
