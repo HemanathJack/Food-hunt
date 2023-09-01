@@ -144,17 +144,21 @@
             display: flex;
             width: 304px;
             height: 40px;
-            padding: 11px 13px;
             align-items: center;
             gap: 8px;
             border-radius: 5px;
             border: 1px solid #000;
         }
         
+        .recipeframe_filter_1input_text_add {
+            display: none;
+            flex-direction: row;
+        }
+        
         .recipeframe_filter_1input_text {
             display: flex;
             height: 22px;
-            padding: 8px 10px;
+            padding: 4px 7px;
             flex-direction: column;
             justify-content: center;
             align-items: center;
@@ -168,7 +172,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 9px;
+            gap: 3px;
         }
         
         .recipeframe_filter_1input_textbox_text {
@@ -336,6 +340,7 @@
             background: #FFF;
             /* dropcurrent */
             box-shadow: 0px 3px 12px 0px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
         }
         
         .frame4_card_imagebox {
@@ -509,35 +514,27 @@
                             <div class="recipeframe_filter_middle1">
                                 <div class="recipeframe_filter_1">
                                     <span class="recipeframe_filter_1text">recipes with</span>
+                                    <div class="recipeframe_filter_1input_text_add">
+                                    </div>
                                     <div class="recipeframe_filter_1input">
-                                        <div class="recipeframe_filter_1input_text">
-                                            <div class="recipeframe_filter_1input_textbox">
-                                                <span class="recipeframe_filter_1input_textbox_text">chicken</span>
-                                                <img class="recipeframe_filter_1input_textbox_img" src="../static/media/close_svgrepo.com.png" onclick="removeDiv(this)" />
-                                            </div>
-                                        </div>
+                                        <input type="text" id="tagInput" style="display: flex;width: 304px;height: 40px; padding: 11px 13px; align-items: center; gap: 8px; border-radius: 5px; border: 1px solid #000;" />
                                     </div>
                                 </div>
                                 <div class="recipeframe_filter_1">
                                     <span class="recipeframe_filter_1text" style="width: 157px;">explore by cuisines</span>
+
+                                    <div class="recipeframe_filter_1input_text_add_1" style="display: none;">
+                                    </div>
                                     <div class="recipeframe_filter_1input">
-                                        <div class="recipeframe_filter_1input_text">
-                                            <div class="recipeframe_filter_1input_textbox">
-                                                <span class="recipeframe_filter_1input_textbox_text">indian</span>
-                                                <img class="recipeframe_filter_1input_textbox_img" src="../static/media/close_svgrepo.com.png" onclick="removeDiv(this)" />
-                                            </div>
-                                        </div>
+                                        <input type="text" id="tagInput_1" style="display: flex;width: 304px;height: 40px; padding: 11px 13px; align-items: center; gap: 8px; border-radius: 5px; border: 1px solid #000;" />
                                     </div>
                                 </div>
                                 <div class="recipeframe_filter_1">
                                     <span class="recipeframe_filter_1text">cooking time</span>
+                                    <div class="recipeframe_filter_1input_text_add_2" style="display: none;">
+                                    </div>
                                     <div class="recipeframe_filter_1input">
-                                        <div class="recipeframe_filter_1input_text">
-                                            <div class="recipeframe_filter_1input_textbox">
-                                                <span class="recipeframe_filter_1input_textbox_text">0-10min</span>
-                                                <img class="recipeframe_filter_1input_textbox_img" src="../static/media/close_svgrepo.com.png" onclick="removeDiv(this)" />
-                                            </div>
-                                        </div>
+                                        <input type="text" id="tagInput_2" style="display: flex;width: 304px;height: 40px; padding: 11px 13px; align-items: center; gap: 8px; border-radius: 5px; border: 1px solid #000;" />
                                     </div>
                                 </div>
                             </div>
@@ -577,7 +574,7 @@
             </div>
             <div class="recipeframe_list">
                 {% for recipe in recipes %}
-                <div class="frame4_card">
+                <div class="frame4_card" onclick="redirectToRecipeDetail({{ recipe.id|safe }})">
                     <div class="frame4_card_imagebox">
                         <div class="frame4_card_imagebox_img"><img src="../../media/{{ recipe.image }}" width="311px" height="161px" /></div>
                     </div>
@@ -618,6 +615,158 @@ Set a Timer: Follow the recommended cooking time on the package, but taste a pie
     </div>
 </body>
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const inputField = document.getElementById("tagInput");
+
+        inputField.addEventListener("blur", function() {
+            addTag(inputField.value.trim());
+            inputField.value = "";
+        });
+
+        inputField.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                addTag(inputField.value.trim());
+                inputField.value = "";
+            }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const inputField = document.getElementById("tagInput_1");
+
+        inputField.addEventListener("blur", function() {
+            addTag(inputField.value.trim());
+            inputField.value = "";
+        });
+
+        inputField.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                addTag1(inputField.value.trim());
+                inputField.value = "";
+            }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const inputField = document.getElementById("tagInput_2");
+
+        inputField.addEventListener("blur", function() {
+            addTag(inputField.value.trim());
+            inputField.value = "";
+        });
+
+        inputField.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                addTag2(inputField.value.trim());
+                inputField.value = "";
+            }
+        });
+    });
+
+    function addTag2(text) {
+        if (text !== "") {
+            const containerDiv = document.querySelector(".recipeframe_filter_1input_text_add_2");
+            containerDiv.style.display = "flex"; // Show the container
+            containerDiv.style.flexDirection = "row";
+            containerDiv.style.gap = "2px";
+
+            const tagDiv = document.createElement("div");
+            tagDiv.className = "recipeframe_filter_1input_text";
+
+            const innerTagDiv = document.createElement("div");
+            innerTagDiv.className = "recipeframe_filter_1input_textbox";
+
+            const tagSpan = document.createElement("span");
+            tagSpan.className = "recipeframe_filter_1input_textbox_text";
+            tagSpan.textContent = text;
+
+            const tagImg = document.createElement("img");
+            tagImg.className = "recipeframe_filter_1input_textbox_img";
+            tagImg.src = "../static/media/close_svgrepo.com.png";
+            tagImg.onclick = function() {
+                removeDiv0(tagDiv);
+            };
+
+            innerTagDiv.appendChild(tagSpan);
+            innerTagDiv.appendChild(tagImg);
+
+            tagDiv.appendChild(innerTagDiv);
+            containerDiv.appendChild(tagDiv);
+        }
+    }
+
+    function addTag1(text) {
+        if (text !== "") {
+            const containerDiv = document.querySelector(".recipeframe_filter_1input_text_add_1");
+            containerDiv.style.display = "flex"; // Show the container
+            containerDiv.style.flexDirection = "row";
+            containerDiv.style.gap = "2px";
+
+            const tagDiv = document.createElement("div");
+            tagDiv.className = "recipeframe_filter_1input_text";
+
+            const innerTagDiv = document.createElement("div");
+            innerTagDiv.className = "recipeframe_filter_1input_textbox";
+
+            const tagSpan = document.createElement("span");
+            tagSpan.className = "recipeframe_filter_1input_textbox_text";
+            tagSpan.textContent = text;
+
+            const tagImg = document.createElement("img");
+            tagImg.className = "recipeframe_filter_1input_textbox_img";
+            tagImg.src = "../static/media/close_svgrepo.com.png";
+            tagImg.onclick = function() {
+                removeDiv0(tagDiv);
+            };
+
+            innerTagDiv.appendChild(tagSpan);
+            innerTagDiv.appendChild(tagImg);
+
+            tagDiv.appendChild(innerTagDiv);
+            containerDiv.appendChild(tagDiv);
+        }
+    }
+
+    function addTag(text) {
+        if (text !== "") {
+            const containerDiv = document.querySelector(".recipeframe_filter_1input_text_add");
+            containerDiv.style.display = "flex"; // Show the container
+            containerDiv.style.flexDirection = "row";
+            containerDiv.style.gap = "2px";
+
+            const tagDiv = document.createElement("div");
+            tagDiv.className = "recipeframe_filter_1input_text";
+
+            const innerTagDiv = document.createElement("div");
+            innerTagDiv.className = "recipeframe_filter_1input_textbox";
+
+            const tagSpan = document.createElement("span");
+            tagSpan.className = "recipeframe_filter_1input_textbox_text";
+            tagSpan.textContent = text;
+
+            const tagImg = document.createElement("img");
+            tagImg.className = "recipeframe_filter_1input_textbox_img";
+            tagImg.src = "../static/media/close_svgrepo.com.png";
+            tagImg.onclick = function() {
+                removeDiv0(tagDiv);
+            };
+
+            innerTagDiv.appendChild(tagSpan);
+            innerTagDiv.appendChild(tagImg);
+
+            tagDiv.appendChild(innerTagDiv);
+            containerDiv.appendChild(tagDiv);
+        }
+    }
+
+
+    function removeDiv0(element) {
+        element.parentNode.removeChild(element);
+    }
+
     function removeDiv(imgElement) {
         // Get the parent div of the clicked image
         var divToRemove = imgElement.closest('.recipeframe_filter_1input_text');
@@ -636,6 +785,11 @@ Set a Timer: Follow the recommended cooking time on the package, but taste a pie
         var parentBox = imgElement.closest(".recipeframe_mealtype_input");
         parentBox.style.background = "";
         imgElement.style.display = "none";
+    }
+
+    function redirectToRecipeDetail(recipeId) {
+        var url = "{% url 'recipe_detail' recipe_id=123 %}".replace('123', recipeId);
+        window.location.href = url;
     }
 </script>
 

@@ -3,17 +3,13 @@
 <html lang="en">
 
 <head>
+    {% load custom_filters %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="{% static 'home.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <style>
-        .custom-input {
-            border: 3px solid #000;
-            /* Adjust the color as needed */
-        }
-        
         body {
             margin: 0;
             overflow: auto;
@@ -154,6 +150,19 @@
         
         .custom_top_recipe_heading {
             max-width: 1100px;
+            color: #1C1C1C;
+            font-family: Lora;
+            font-size: 30px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 36px;
+            /* 120% */
+        }
+        
+        .recipes_foryou_heading {
+            align-items: flex-start;
+            text-align: left;
+            width: 1100px;
             color: #1C1C1C;
             font-family: Lora;
             font-size: 30px;
@@ -314,6 +323,7 @@
             border: 3px solid #457B9D;
             background: #FFF;
             animation-duration: 0ms;
+            cursor: pointer;
         }
         
         .add_recipe_frame_card_detail_text_button_class {
@@ -324,6 +334,7 @@
             font-weight: 500;
             line-height: normal;
             text-transform: uppercase;
+            cursor: pointer;
         }
         
         .add_recipe_frame_card_detail_text_title_name {
@@ -429,6 +440,7 @@
             background: #FFF;
             /* dropcurrent */
             box-shadow: 0px 3px 12px 0px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
         }
         
         .frame4_card_imagebox {
@@ -528,11 +540,12 @@
 
             <div class="add_recipe_frame_card_text">
                 <div class="add_recipe_frame_card_detail_text_title">
-                    <p class="add_recipe_frame_card_detail_text_title_name">{{ user.username }}Add Your Recipe</p>
+                    <p class="add_recipe_frame_card_detail_text_title_name">
+                        <a style="margin-right: 15px;">{{ user.username }}</a>Add Your Recipe</p>
                     <p class="add_recipe_frame_card_detail_text_title_detail">Upload your own recipes and share it to the world!</p>
                 </div>
-                <div class="add_recipe_frame_card_detail_text_button">
-                    <button class="add_recipe_frame_card_detail_text_button_class" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add Recipe</button>
+                <div class="add_recipe_frame_card_detail_text_button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <div class="add_recipe_frame_card_detail_text_button_class">Add Recipe</div>
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-xl">
                             <div class="modal-content">
@@ -672,7 +685,7 @@
                     </div>
                 </div>
             </div>
-            <div class="custom_top_recipe_section">
+            <!-- <div class="custom_top_recipe_section">
                 <div class="custom_top_recipe_heading">Top recipes for you</div>
                 <div class="custom_top_recipe_images_container">
                     <div class="custom_top_recipe_flex_container">
@@ -696,21 +709,21 @@
                     </div>
                     <div class="custom_top_recipe_slide_control">next-slide</div>
                 </div>
-            </div>
+            </div> -->
         </div>
 
+        <div class="recipes_foryou_heading">Recipes for you</div>
         <div class="frame4">
-
             {% for recipe in recipes %}
-            <div class="frame4_card">
+            <div class="frame4_card" onclick="redirectToRecipeDetail({{ recipe.id|safe }})">
                 <div class="frame4_card_imagebox">
                     <div class="frame4_card_imagebox_img"><img src="../../media/{{ recipe.image }}" width="311px" height="161px" /></div>
                 </div>
                 <div class="frame4_card_textbox">
                     <div class="frame4_card_textbox_details">
-                        <a class="frame4_card_textbox_details_1" href="{% url 'recipe_detail' recipe.id %}">{{ recipe.title }}</a>
+                        <a class="frame4_card_textbox_details_1">{{ recipe.title }}</a>
                         <span class="frame4_card_textbox_details_2">{{ recipe.cuisines }}</span>
-                        <span class="frame4_card_textbox_details_3">{{ recipe.ingredients }}</span>
+                        <span class="frame4_card_textbox_details_3">{{ recipe.ingredients|first_three_words }}</span>
                     </div>
                     <div class="frame4_circle">
                         <div class="frame4_mealcircle">
@@ -727,5 +740,12 @@
         </div>
     </div>
 </body>
+
+<script>
+    function redirectToRecipeDetail(recipeId) {
+        var url = "{% url 'recipe_detail' recipe_id=123 %}".replace('123', recipeId);
+        window.location.href = url;
+    }
+</script>
 
 </html>

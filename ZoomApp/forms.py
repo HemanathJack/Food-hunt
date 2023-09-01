@@ -1,5 +1,28 @@
 from django import forms
-from .models import Recipe
+from .models import Recipe, UserProfile
+from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
+from django.contrib.auth.models import User
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['email', 'profile_image']
+        widgets = {
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'profile_image': forms.FileInput(attrs={'class': 'form-control-file'}),
+        }
+
+class LoginForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
+
+class EditUsernameForm(UserChangeForm):
+    class Meta:
+        model = User
+        fields = ['username']
+
+class EditPasswordForm(PasswordChangeForm):
+    pass
 
 class RecipeForm(forms.ModelForm):
     class Meta:

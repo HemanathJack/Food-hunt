@@ -3,35 +3,389 @@
 
 <head>
     <title>{{ recipe.title }}</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
     <style>
         body {
             margin: 0;
-            overflow: hidden;
+            overflow: scroll;
             /* Disable vertical scrolling */
         }
         
-        .row {
+        .home {
             display: inline-flex;
             width: 1540px;
             flex-direction: column;
             align-items: center;
-            gap: 103px;
             background: #FFF;
+            gap: 44px;
+        }
+        
+        .recipe_list_box1 {
+            display: flex;
+            width: 1504px;
+            padding: 0px 11px;
+            align-items: center;
+            align-content: center;
+            gap: 82px;
+            flex-wrap: wrap;
+        }
+        
+        .recipe_list_box2 {
+            display: flex;
+            width: 1467px;
+            height: 421px;
+            align-items: flex-start;
+            align-content: flex-start;
+            gap: 29px;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+        }
+        
+        .recipe_box_img_title_disc {
+            display: flex;
+            align-items: flex-start;
+            gap: 29px;
+        }
+        
+        .recipe_box_img {
+            display: flex;
+            width: 634px;
+            height: 421px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+            flex-shrink: 0;
+            border-radius: 50px;
+            background: #FFF;
+            /* dropcurrent */
+            box-shadow: 0px 3px 12px 0px rgba(0, 0, 0, 0.08);
+        }
+        
+        .recipe_img {
+            width: 634px;
+            height: 422px;
+            flex-shrink: 0;
+            border-radius: 43px;
+            background: url(<path-to-image>), lightgray 50% / cover no-repeat;
+            border-radius: 50px;
+        }
+        
+        .recipe_box_title_disc {
+            display: flex;
+            width: 804px;
+            height: 293px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 9px;
+            flex-shrink: 0;
+        }
+        
+        .recipe_box_title {
+            display: flex;
+            width: 804px;
+            padding: 10px;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .recipe_title {
+            display: flex;
+            width: 804px;
+            padding: 10px;
+            align-items: center;
+            gap: 10px;
+            color: #000;
+            font-family: Lora;
+            font-size: 40px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+            letter-spacing: 0.8px;
+        }
+        
+        .recipe_box_disc {
+            display: flex;
+            width: 804px;
+            height: 213px;
+            padding: 10px;
+            align-items: flex-start;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+        
+        .recipe_disc {
+            width: 794px;
+            flex-shrink: 0;
+            color: #000;
+            font-family: Lora;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            letter-spacing: 0.4px;
+        }
+        
+        .recipe_box_type_cusn_time {
+            display: flex;
+            width: 804px;
+            align-items: flex-start;
+            gap: 48px;
+        }
+        
+        .recipe_type_box {
+            display: flex;
+            width: 129px;
+            height: 60px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+            border-radius: 18px;
+            border: 1px solid #BD9100;
+            background: #FCE7A1;
+        }
+        
+        .recipe_type {
+            color: #000;
+            font-family: Lora;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+            letter-spacing: 0.48px;
+        }
+        
+        .recipe_cusn_box {
+            display: flex;
+            width: 130px;
+            height: 59px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+            border-radius: 16px;
+            border: 1px solid #008CE7;
+            background: linear-gradient(95deg, rgba(173, 218, 246, 0.80) 8.28%, rgba(135, 209, 255, 0.30) 97.3%);
+        }
+        
+        .recipe_cusn {
+            color: #000;
+            font-family: Lora;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            letter-spacing: 0.48px;
+        }
+        
+        .recipe_time_img_box {
+            display: flex;
+            width: 166px;
+            height: 58px;
+            justify-content: center;
+            align-items: center;
+            gap: 19px;
+            flex-shrink: 0;
+            border-radius: 22px;
+            border: 3px solid #000;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.70) 0%, rgba(255, 255, 255, 0.30) 100%);
+        }
+        
+        .recipe_time_img {
+            width: 30px;
+            height: 31px;
+            flex-shrink: 0;
+        }
+        
+        .recipe_time {
+            color: #000;
+            font-family: Lora;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            letter-spacing: 0.48px;
+        }
+        
+        .recipe_box_ing_step {
+            display: flex;
+            width: 1493px;
+            align-items: flex-end;
+            align-content: flex-end;
+            gap: 55px -254px;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+        }
+        
+        .recipe_ing_box {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        
+        .recipe_ing_title {
+            color: #000;
+            font-family: Lora;
+            font-size: 32px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            letter-spacing: 0.64px;
+        }
+        
+        .recipe_ing_detail_img {
+            display: flex;
+            width: 1413px;
+            height: 193px;
+            padding: 2px 42px;
+            align-items: center;
+            gap: 94px;
+            border-radius: 16px;
+            border: 1px solid #000;
+            background: #F4FFED;
+        }
+        
+        .recipe_ing_detail_box {
+            display: flex;
+            width: 1118px;
+            align-items: center;
+            align-content: center;
+            gap: 10px;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+        }
+        
+        .recipe_ing_detail {
+            width: 1118px;
+            flex-shrink: 0;
+            color: #000;
+            font-family: Lora;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            letter-spacing: 0.4px;
+        }
+        
+        .recipe_ing_img {
+            width: 112px;
+            height: 111px;
+            flex-shrink: 0;
+        }
+        
+        .recipe_step_box {
+            margin-top: 30px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        
+        .recipe_step_title {
+            color: #000;
+            font-family: Lora;
+            font-size: 32px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            letter-spacing: 0.64px;
+        }
+        
+        .recipe_step_detail {
+            width: 1379px;
+            color: #000;
+            font-family: Lora;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            letter-spacing: 0.4px;
+        }
+        
+        .recipe_box_img_details {
+            display: flex;
+            width: 1467px;
+            height: 421px;
+            align-items: flex-start;
+            align-content: flex-start;
+            gap: 29px;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+        }
+        
+        .recipe_box_title_dis_time_cus_type {
+            display: flex;
+            width: 804px;
+            height: 421px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 69px;
+            flex-shrink: 0;
         }
     </style>
 </head>
 
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-    <div class="row">
+    <div class="home">
         {% include 'search.html' %}
-        <div class="cardrecipe">
-            {% if recipe.author == user.username %} <a href="{% url 'update_recipe' recipe.pk %}">Edit Recipes</a><br/> {% endif %}
-            <div class="recipeimage">
-                <div class="recimage"><img src="{{ recipe.img.url }}"></div>
+        <div class="recipe_list_box1">
+            <div class="recipe_list_box2">
+                <div class="recipe_box_img_title_disc">
+                    <div class="recipe_box_img_details">
+                        <div class="recipe_box_img">
+                            <img class="recipe_img" src="../../media/{{ recipe.image }}" />
+                        </div>
+                        <div class="recipe_box_title_dis_time_cus_type">
+                            <div class="recipe_box_title_disc">
+                                <div class="recipe_box_title">
+                                    <p class="recipe_title"> {{ recipe.title }}</p>
+                                </div>
+                                <div class="recipe_box_disc">
+                                    <div class="recipe_disc">{{ recipe.description }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="recipe_box_type_cusn_time">
+                                <div class="recipe_type_box">
+                                    <div class="recipe_type">{{ recipe.meal_type }}</div>
+                                </div>
+                                <div class="recipe_cusn_box">
+                                    <div class="recipe_cusn"> {{ recipe.cuisines }}</div>
+                                </div>
+                                <div class="recipe_time_img_box">
+                                    <img class="recipe_time_img" src="../../static/media/recipe_time.png" />
+                                    <div class="recipe_time"> {{ recipe.cooking_time }} min</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="recipe_box_ing_step">
+                    <div class="recipe_ing_box">
+                        <div class="recipe_ing_title">Ingredients</div>
+                        <div class="recipe_ing_detail_img">
+                            <div class="recipe_ing_detail_box">
+                                <div class="recipe_ing_detail">
+                                    {{ recipe.ingredients }}
+                                </div>
+                            </div>
+                            <img class="recipe_ing_img" src="../../static/media/ingredients.png">
+                        </div>
+                    </div>
+                    <div class="recipe_step_box">
+                        <div class="recipe_step_title">Cooking Steps</div>
+                        <div class="recipe_step_detail">
+                            {{ recipe.steps }}
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="recipedetailts">{{ recipe.title }} <br>{{ recipe.description }}<br> {{ recipe.ingredients }} <br>{{ recipe.steps }} <br>{{ recipe.images }} <br>{{ recipe.author }}</div>
         </div>
     </div>
 </body>

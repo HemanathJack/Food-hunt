@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        .signup-container,
+        .login-container {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+        
+        .signup-form input,
+        .login-form input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        
+        .signup-button,
+        .login-button {
+            background-color: #4285F4;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .signup-button:hover {
+            background-color: #2E6DA4;
+        }
+    </style>
+</head>
+
+<body>{% if register %}
+    <div class="signup-container" id="signup-form">
+
+        <h2>Register</h2>
+        <form class="signup-form" method="post" action="{% url 'register' %}">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+            <p id="password_match_message" style="display: none; color: green;">Passwords match.</p>
+            <p id="password_mismatch_message" style="display: none; color: red;">Passwords do not match.</p>
+            <button class="signup-button" type="submit" onclick="validateForm()">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="#" onclick="showLoginForm(); return false;">Log in</a></p>
+    </div>{% elif login_form == "login_form" %}
+    <div class="login-container" id="login-form">
+        <h2>Login</h2>
+        <form class="login-form" method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" id="password" name="password" placeholder="Password" required> {% if login_error %}
+            <p id="password_mismatch_message" style="color: red;">Invalid username or password.</p>{% endif %}
+            <button class="login-button" type="submit">Log in</button>
+        </form>
+        <p>Don't have an account? <a href="#" onclick="showSignupForm()">Sign up</a></p>
+    </div>
+    {% elif edit_form %}
+    <h2>Edit Profile</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %} {{ edit_form.as_p }} {{ username_form.as_p }} {{ password_form.as_p }}
+        <button type="submit">Save Changes</button>
+    </form>
+    {% endif %}
+
+
+    <script>
+        function validateForm() {
+            const passwordField = document.getElementById('password');
+            const confirmPasswordField = document.getElementById('confirm_password');
+            const passwordMatchMessage = document.getElementById('password_match_message');
+            const passwordMismatchMessage = document.getElementById('password_mismatch_message');
+
+            const password = passwordField.value;
+            const confirmPassword = confirmPasswordField.value;
+
+            if (password === confirmPassword) {
+                passwordMatchMessage.style.display = 'block';
+                passwordMismatchMessage.style.display = 'none';
+            } else {
+                passwordMatchMessage.style.display = 'none';
+                passwordMismatchMessage.style.display = 'block';
+                event.preventDefault();
+            }
+        }
+
+        function showLoginForm() {
+            const loginForm = document.getElementById('login-form');
+            const SignupForm = document.getElementById('signup-form');
+            loginForm.style.display = 'block'; // Show the login form
+            SignupForm.style.display = 'none';
+        }
+
+        function showSignupForm() {
+            const loginForm = document.getElementById('login-form');
+            const SignupForm = document.getElementById('signup-form');
+            loginForm.style.display = 'none'; // Show the login form
+            SignupForm.style.display = 'block';
+        }
+    </script>
+
+</body>
+
+</html>

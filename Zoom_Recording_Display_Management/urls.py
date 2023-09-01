@@ -25,7 +25,9 @@ from django.contrib.auth.views import LoginView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', LoginView.as_view(), name="login"),
+    path('login/', views.user_login, name="login"),
+    path('register/', views.register, name="register"),
+    path('edit_profile/', views.edit_profile, name="edit_profile"),
     path('create_recipe', views.create_recipe, name='create_recipe'),
     path('recipe/<int:recipe_pk>/update/', views.update_recipe, name='update_recipe'),
     path('recipe/<int:recipe_id>/delete', views.delete_recipe, name='delete_recipe'),
