@@ -546,53 +546,55 @@
                 </div>
                 <div class="add_recipe_frame_card_detail_text_button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     <div class="add_recipe_frame_card_detail_text_button_class">Add Recipe</div>
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-xl">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Recipe</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form method="post" enctype="multipart/form-data" action="{% url 'create_recipe' %}">
-                                        {% csrf_token %}
-                                        <div class="mb-3">
-                                            <label for="title" class="form-label">Title</label>
-                                            <input type="text" class="form-control" id="title" name="title" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="description" class="form-label">Description</label>
-                                            <textarea class="form-control" id="description" name="description" required></textarea>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="ingredients" class="form-label">Ingredients</label>
-                                            <textarea class="form-control" id="ingredients" name="ingredients" required></textarea>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="steps" class="form-label">Steps</label>
-                                            <textarea class="form-control" id="steps" name="steps" required></textarea>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="image" class="form-label">Image</label>
-                                            <input type="file" class="form-control" id="image" name="image">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="mealType" class="form-label">Meal Type</label>
-                                            <select class="form-select" id="mealType" name="meal_type" multiple required size="5">
+
+                </div>
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Recipe</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" enctype="multipart/form-data" action="{% url 'create_recipe' %}">
+                                    {% csrf_token %}
+                                    <div class="mb-3">
+                                        <label for="title" class="form-label">Title</label>
+                                        <input type="text" class="form-control" id="title" name="title" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="description" class="form-label">Description</label>
+                                        <textarea class="form-control" id="description" name="description" required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="ingredients" class="form-label">Ingredients</label>
+                                        <textarea class="form-control" id="ingredients" name="ingredients" required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="steps" class="form-label">Steps</label>
+                                        <textarea class="form-control" id="steps" name="steps" required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="image" class="form-label">Image</label>
+                                        <input type="file" class="form-control" id="image" name="image">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="mealType" class="form-label">Meal Type</label>
+                                        <select class="form-select" id="mealType" name="meal_type" multiple required size="5">
                                                 <option value="Breakfast">Breakfast</option>
                                                 <option value="Lunch">Lunch</option>
                                                 <option value="Dinner">Dinner</option>
                                                 <option value="Snack">Snack</option>
                                                 <option value="Dessert">Dessert</option>
                                             </select>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="cookingTime" class="form-label">Cooking Time (minutes)</label>
-                                            <input type="number" class="form-control" id="cookingTime" name="cooking_time" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="cuisine" class="form-label">Cuisine</label>
-                                            <select class="form-select" id="cuisine" name="cuisines" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="cookingTime" class="form-label">Cooking Time (minutes)</label>
+                                        <input type="number" class="form-control" id="cookingTime" name="cooking_time" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="cuisine" class="form-label">Cuisine</label>
+                                        <select class="form-select" id="cuisine" name="cuisines" required>
                                                 <option value="Italian">Italian</option>
                                                 <option value="Indian">Indian</option>
                                                 <option value="Chinese">Chinese</option>
@@ -603,13 +605,12 @@
                                                 <option value="Thai">Thai</option>
                                                 <!-- Add more cuisine options here -->
                                             </select>
-                                        </div>
-
-                                        <div class="modal-footer"><button type="submit" class="btn btn-primary">Create Recipe</button>
-                                    </form>
                                     </div>
 
+                                    <div class="modal-footer"><button type="submit" class="btn btn-primary">Create Recipe</button>
+                                </form>
                                 </div>
+
                             </div>
                         </div>
                     </div>
