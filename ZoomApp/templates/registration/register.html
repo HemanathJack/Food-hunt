@@ -68,61 +68,64 @@
             <button class="signup-button" type="submit" onclick="validateForm()">Sign Up</button>
         </form>
         <p>Already have an account? <a href="#" onclick="showLoginForm(); return false;">Log in</a></p>
-    </div>{% elif login_form == "login_form" %}
+    </div>{% if login_form == "login_form" %}
     <div class="login-container" id="login-form">
-        <h2>Login</h2>
-        <form class="login-form" method="post" action="{% url 'login' %}">
-            {% csrf_token %}
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" id="password" name="password" placeholder="Password" required> {% if login_error %}
-            <p id="password_mismatch_message" style="color: red;">Invalid username or password.</p>{% endif %}
-            <button class="login-button" type="submit">Log in</button>
+        {% else %}
+        <div class="login-container" id="login-form" style="display: none;">
+            {% endif %}
+            <h2>Login</h2>
+            <form class="login-form" method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" id="password" name="password" placeholder="Password" required> {% if login_error %}
+                <p id="password_mismatch_message" style="color: red;">Invalid username or password.</p>{% endif %}
+                <button class="login-button" type="submit">Log in</button>
+            </form>
+            <p>Don't have an account? <a href="#" onclick="showSignupForm()">Sign up</a></p>
+        </div>
+        {% elif edit_form %}
+        <h2>Edit Profile</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %} {{ edit_form.as_p }} {{ username_form.as_p }} {{ password_form.as_p }}
+            <button type="submit">Save Changes</button>
         </form>
-        <p>Don't have an account? <a href="#" onclick="showSignupForm()">Sign up</a></p>
-    </div>
-    {% elif edit_form %}
-    <h2>Edit Profile</h2>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %} {{ edit_form.as_p }} {{ username_form.as_p }} {{ password_form.as_p }}
-        <button type="submit">Save Changes</button>
-    </form>
-    {% endif %}
+        {% endif %}
 
 
-    <script>
-        function validateForm() {
-            const passwordField = document.getElementById('password');
-            const confirmPasswordField = document.getElementById('confirm_password');
-            const passwordMatchMessage = document.getElementById('password_match_message');
-            const passwordMismatchMessage = document.getElementById('password_mismatch_message');
+        <script>
+            function validateForm() {
+                const passwordField = document.getElementById('password');
+                const confirmPasswordField = document.getElementById('confirm_password');
+                const passwordMatchMessage = document.getElementById('password_match_message');
+                const passwordMismatchMessage = document.getElementById('password_mismatch_message');
 
-            const password = passwordField.value;
-            const confirmPassword = confirmPasswordField.value;
+                const password = passwordField.value;
+                const confirmPassword = confirmPasswordField.value;
 
-            if (password === confirmPassword) {
-                passwordMatchMessage.style.display = 'block';
-                passwordMismatchMessage.style.display = 'none';
-            } else {
-                passwordMatchMessage.style.display = 'none';
-                passwordMismatchMessage.style.display = 'block';
-                event.preventDefault();
+                if (password === confirmPassword) {
+                    passwordMatchMessage.style.display = 'block';
+                    passwordMismatchMessage.style.display = 'none';
+                } else {
+                    passwordMatchMessage.style.display = 'none';
+                    passwordMismatchMessage.style.display = 'block';
+                    event.preventDefault();
+                }
             }
-        }
 
-        function showLoginForm() {
-            const loginForm = document.getElementById('login-form');
-            const SignupForm = document.getElementById('signup-form');
-            loginForm.style.display = 'block'; // Show the login form
-            SignupForm.style.display = 'none';
-        }
+            function showLoginForm() {
+                const loginForm = document.getElementById('login-form');
+                const SignupForm = document.getElementById('signup-form');
+                loginForm.style.display = 'block'; // Show the login form
+                SignupForm.style.display = 'none';
+            }
 
-        function showSignupForm() {
-            const loginForm = document.getElementById('login-form');
-            const SignupForm = document.getElementById('signup-form');
-            loginForm.style.display = 'none'; // Show the login form
-            SignupForm.style.display = 'block';
-        }
-    </script>
+            function showSignupForm() {
+                const loginForm = document.getElementById('login-form');
+                const SignupForm = document.getElementById('signup-form');
+                loginForm.style.display = 'none'; // Show the login form
+                SignupForm.style.display = 'block';
+            }
+        </script>
 
 </body>
 

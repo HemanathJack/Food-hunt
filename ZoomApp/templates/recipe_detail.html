@@ -385,6 +385,7 @@
                         </div>
                     </div>
                 </div>
+                {% if recipe.author == user %}<a href="{% url 'delete_recipe' pk=recipe.id %}">Delete</a>{% endif %}
             </div>
         </div>
     </div>

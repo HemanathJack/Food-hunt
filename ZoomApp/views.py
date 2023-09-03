@@ -127,5 +127,7 @@ def update_recipe(request, recipe_pk):
 
 def delete_recipe(request, pk):
     recipe = get_object_or_404(Recipe, pk=pk)
-    recipe.delete()
-    return redirect('recipe_list')
+    # recipe.delete()
+    if recipe:
+        print("delete")
+    return redirect('home')

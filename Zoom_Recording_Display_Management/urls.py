@@ -30,7 +30,7 @@ urlpatterns = [
     path('edit_profile/', views.edit_profile, name="edit_profile"),
     path('create_recipe', views.create_recipe, name='create_recipe'),
     path('recipe/<int:recipe_pk>/update/', views.update_recipe, name='update_recipe'),
-    path('recipe/<int:recipe_id>/delete', views.delete_recipe, name='delete_recipe'),
+    path('recipe/<int:pk>', views.delete_recipe, name='delete_recipe'),
     path('recipes/', views.recipe_list, name='recipe_list'),
     path('recipes/<int:recipe_id>/', views.recipe_detail, name='recipe_detail'),
     path('logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout'),
